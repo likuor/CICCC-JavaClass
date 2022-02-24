@@ -30,9 +30,11 @@ public class GuessTheCity {
             Random rand = new Random();
             int pickedNum = rand.nextInt(MAXIMUM_ARRAY);
             String pickedCity = cityList[pickedNum];
-            System.out.println(pickedCity);
-            String[] cityLetters = pickedCity.split("");
+            String replacedPickedCity = pickedCity.replace(" ", "");
+            String[] cityLetters = replacedPickedCity.split("");
+            System.out.println(replacedPickedCity);
 
+            //making underscores of the chosen city
             String underScores = "";
             String[] underScoresArray = new String[cityLetters.length];
             int cal = 0;
@@ -41,28 +43,61 @@ public class GuessTheCity {
                 underScoresArray[cal] = "_";
                 cal++;
             }
-//            System.out.println(Arrays.toString(underScoresArray));
-//            System.out.println(Arrays.toString(cityLetters));
 
 
+            //the main logic
             Scanner scanner = new Scanner(System.in);
             System.out.println("Here's a question");
-            System.out.println("Letters of the chosen city are " + pickedCity.length() + " words");
+            System.out.println("The city name has " + replacedPickedCity.length() + " letters");
             System.out.println(underScores);
+            int guessCount = 0;
+            int loopCount = 0;
+            int gotLetters = 0;
+            int restLetters = 0;
+            String wrongLetters = "";
+            restLetters = underScoresArray.length;
 
-            for (int i = 0; i < HP; i++){
+            while(loopCount < HP){
+                boolean unMatch = true;
+                System.out.print("Guess a letter : ");
                 String letter = scanner.next();
-                for (int k = 0; k < pickedCity.length(); k++){
+                for (int k = 0; k < replacedPickedCity.length(); k++){
                     if (cityLetters[k].equals(letter)) {
                         underScoresArray[k] = letter;
+                        gotLetters = letter.length();
+                        restLetters = restLetters - gotLetters;
+                        unMatch = false;
                     }
                 }
-//                System.out.println(Arrays.toString(underScoresArray));
+
+                //Replacing letters
                 String beforeReplace = Arrays.toString(underScoresArray);
                 String after1Replace = beforeReplace.replace(",", "");
                 String after2Replace = after1Replace.replace("]", "");
                 String resultReplace = after2Replace.replace("[", "");
                 System.out.println(resultReplace);
+
+
+                //game count control
+                if (unMatch){
+                    guessCount++;
+                    wrongLetters += letter + ",";
+                } else {
+                    loopCount = loopCount - 1;
+                }
+
+                //judge win or lose
+                System.out.println("You've guessed " + guessCount + " times. Here's the wrong letters: " + wrongLetters);
+                if(guessCount == HP){
+                    System.out.println("You lose. The answer is: " + replacedPickedCity);
+                }
+                if (restLetters == 0){
+                    System.out.println("You win");
+                    break;
+                }
+
+                loopCount++;
+                System.out.println();
             }
 
 
