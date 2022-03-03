@@ -32,7 +32,7 @@ public class GuessTheCity {
             String pickedCity = cityList[pickedNum];
             String replacedPickedCity = pickedCity.replace(" ", "");
             String[] cityLetters = replacedPickedCity.split("");
-            System.out.println(replacedPickedCity);
+//            System.out.println(replacedPickedCity);
 
             //making underscores of the chosen city
             String underScores = "";
