@@ -1,2 +1,5 @@
-package MiniProject2;public class ContactList {
+package MiniProject2;
+
+public class ContactList {
+
 }
