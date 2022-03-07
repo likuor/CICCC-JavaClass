@@ -1,49 +1,54 @@
 package MiniProject2;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InputCollector {
     //fields
-//    private boolean gameQuitFlag;
+//    private String userInput;
 
     //constructor
 //    public InputCollector(){
-//        this.gameQuitFlag = false;
+//        this.userInput = "";
 //    }
 
-    public static String getUserInput(String prompt){
 
-        // display Menu
-        System.out.println("===== Contact  App =====");
-        System.out.println("| 1, List all Contacts |");
-        System.out.println("| 2, Add new Contacts  |");
-        System.out.println("| 3, Remove Contacts   |");
-        System.out.println("| 4, Update Contacts   |");
-        System.out.println("| 5, Quit              |");
-        System.out.println("========================");
+    public static String getUserInput(String prompt){
+        String userInput = "";
+
+        System.out.println(prompt);
 
         //get user input
         Scanner in = new Scanner(System.in);
-        String userInput = in.nextLine();
+        userInput = in.nextLine();
+        if (inputValidation(userInput)){
+            System.out.println();
+            System.out.println("Invalid input. Try again");
+            System.out.println();
 
-        //user input validation
-        if (!userInput.matches("[1-5]+")) {
-            System.out.println("Invalid number");
-        }
-
-        //call exit method
-        if (exit(userInput)){
-            System.out.println("Thank you for playing with me, Adios!");
         }
         return userInput;
     }
 
-    public static boolean exit(String userInput) {
-        boolean gameQuitFlag = false;
+    public static String createInfo(String prompt){
+        String userInput = "";
+        String name ;
+        String number ;
 
-        if(userInput.equals("5")) {
-            gameQuitFlag = true;
-        }
-        return gameQuitFlag;
+        //get user input
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Type your name");
+        name = in.nextLine();
+
+        System.out.println("Type your number");
+        number = in.nextLine();
+
+
+        return userInput;
+    }
+
+    private static boolean inputValidation(String userInput) {
+        return !userInput.matches("[1-5]+");
     }
 }
