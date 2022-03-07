@@ -1,7 +1,6 @@
 package MiniProject2;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Driver {
 
@@ -28,28 +27,17 @@ public class Driver {
         return gameQuitFlag;
     }
 
-    public static ArrayList<String> createUserInfo (){
-
+    public static Contact createNewUser (){
         String name ;
         String number ;
-        Scanner in = new Scanner(System.in);
 
-        System.out.println("Type your name");
-        name = in.nextLine();
-
-        System.out.println("Type your number");
-        number = in.nextLine();
-
-
-        ArrayList<String> userInfo = new ArrayList<String>();
-        userInfo.add(name);
-        userInfo.add(number);
-
+        name = InputCollector.getUserInput("Enter your name: ");
+        number = InputCollector.getUserInput("Enter your number: ");
         Contact userContact = new Contact(name,number);
 
         System.out.println("Successfully added a new contact!");
 
-        return userInfo;
+        return userContact;
     }
 
     public static void main(String[] args) {
@@ -57,9 +45,14 @@ public class Driver {
             showDisplayMenu();
             String userInput = InputCollector.getUserInput("Enter your option: ");
             if (userInput.equals("2") ){
-                createUserInfo();
-                ContactList contactList = new ContactList(createUserInfo());
-                System.out.println(contactList.getUserName());
+                createNewUser();
+
+//                ArrayList<String> userInfo = new ArrayList<String>();
+//                userInfo.add(createNewUser().getUserName());
+//                userInfo.add(createNewUser().getUserNumber());
+
+//                ContactList contactList = new ContactList(createNewUser().getUserName(), createNewUser().getUserNumber());
+//                System.out.println(contactList.getUserName());
 
             } else if (quit(userInput)){
                 break;
