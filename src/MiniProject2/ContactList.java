@@ -3,39 +3,71 @@ package MiniProject2;
 import java.util.ArrayList;
 
 public class ContactList {
-    //ここにCRUD
 
     //fields
-    private String userName;
-    private String userNumber;
+    private ArrayList<Contact> contactArrayList;
 
-
-    public ContactList(){}
-
-    public ContactList(ArrayList<String> userInfo){
-        this.userName = userInfo.get(0);
-        this.userNumber = userInfo.get(1);
+    public ContactList(){
+        contactArrayList = new ArrayList<Contact>();
     }
 
-    public ContactList(String userName, String userNumber){
-        this.userName = userName;
-        this.userNumber = userNumber;
+    public void addContact(Contact newContact){
+        getContactArrayList().add(newContact);
     }
 
-    public String getUserName() {
-        return userName;
+    public void showContact(){
+        for(int i = 0; i < getContactArrayList().size() ; i++) {
+            String name = getContactArrayList().get(i).getUserName();
+            String number = getContactArrayList().get(i).getUserNumber();
+            String result = String.format("%d. <%s> (Mobile= %s, )", i ,name, number);
+            System.out.println(result);
+        }
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void removeContact(){
+        String message = "";
+        showContact();
+
+        String strInput = InputCollector.getUserInput("Enter the index of the contact to remove: ");
+        int removeIndex = Integer.parseInt(strInput);
+
+        for(int i = 0; i < getContactArrayList().size() ; i++) {
+            if (removeIndex == i){
+                message = String.format("Successfully removed %s", getContactArrayList().get(i).getUserName());
+                getContactArrayList().remove(removeIndex);
+            } else {
+                message = "Not found";
+            }
+        }
+        System.out.println(message);
     }
 
-    public String getUserNumber() {
-        return userNumber;
+    public void updateContact(){
+        String message = "";
+        String name = "";
+        String number = "";
+
+        showContact();
+
+        String strInput = InputCollector.getUserInput("Enter the index of the contact to update: ");
+        int updateIndex = Integer.parseInt(strInput);
+
+        for(int i = 0; i < getContactArrayList().size() ; i++) {
+            if (updateIndex == i){
+                name = InputCollector.getUserInput("Enter your new name: ");
+                number = InputCollector.getUserInput("Enter your new number: ");
+                Contact userContact = new Contact(name,number);
+                getContactArrayList().set(i,userContact);
+                message = "Successfully updated";
+
+            } else {
+                message = "Not found";
+            }
+        }
+        System.out.println(message);
     }
 
-    public void setUserNumber(String userNumber) {
-        this.userNumber = userNumber;
+    public ArrayList<Contact> getContactArrayList() {
+        return contactArrayList;
     }
-
 }

@@ -14,11 +14,6 @@ public class Contact {
     //constructor
     public Contact(){}
 
-    public Contact(ArrayList<String> userInfo){
-        this.userName = userInfo.get(0);
-        this.userNumber = userInfo.get(1);
-    }
-
     public Contact(String userName, String userNumber){
         setUserName(userName);
         setUserNumber(userNumber);

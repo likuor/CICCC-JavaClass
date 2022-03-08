@@ -27,38 +27,65 @@ public class Driver {
         return gameQuitFlag;
     }
 
-    public static Contact createNewUser (){
+    public static Contact createNewUser (ContactList list){
         String name ;
         String number ;
 
-        name = InputCollector.getUserInput("Enter your name: ");
-        number = InputCollector.getUserInput("Enter your number: ");
+        while (true){
+            name = InputCollector.getUserInput("Enter your name: ");
+            if (name.length() <= 1){
+                continue;
+            }
+
+            while(true){
+                number = InputCollector.getUserInput("Enter your number: ");
+                if (number.length() <= 9){
+                    continue;
+                }
+                break;
+            }
+            break;
+        }
+
         Contact userContact = new Contact(name,number);
+        list.addContact(userContact);
 
         System.out.println("Successfully added a new contact!");
 
         return userContact;
     }
 
+    public static void showAllUsers (ContactList list){
+        list.showContact();
+        System.out.println();
+    }
+
+    public static void removeUser (ContactList list){
+        list.removeContact();
+    }
+
+    public static void updateUser (ContactList list){
+        list.updateContact();
+    }
+
     public static void main(String[] args) {
+        ContactList contactList = new ContactList();
+
         while(true){
             showDisplayMenu();
             String userInput = InputCollector.getUserInput("Enter your option: ");
-            if (userInput.equals("2") ){
-                createNewUser();
 
-//                ArrayList<String> userInfo = new ArrayList<String>();
-//                userInfo.add(createNewUser().getUserName());
-//                userInfo.add(createNewUser().getUserNumber());
-
-//                ContactList contactList = new ContactList(createNewUser().getUserName(), createNewUser().getUserNumber());
-//                System.out.println(contactList.getUserName());
-
+            if (userInput.equals("1") ){
+                showAllUsers(contactList);
+            } else if (userInput.equals("2") ){
+                createNewUser(contactList);
+            } else if (userInput.equals("3") ) {
+                removeUser(contactList);
+            } else if (userInput.equals("4") ) {
+                updateUser(contactList);
             } else if (quit(userInput)){
                 break;
             }
         }
     }
-
-
 }
