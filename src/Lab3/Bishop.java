@@ -1,9 +1,9 @@
 package Lab3;
 
-public class Bishop extends Piece{
+class Bishop extends Piece {
 
-    public Bishop(int value, boolean isWhite){
-        super(value,isWhite);
+    public Bishop(boolean isWhite) {
+        super(3, isWhite);
     }
 
     @Override
@@ -12,7 +12,8 @@ public class Bishop extends Piece{
     }
 
     @Override
-    public String toString(){
-        return "Bishop{value='" + this.getValue() + '\'' + '}';
+    public String toString() {
+        return "Bishop{value='" + getValue() + "'}";
     }
+
 }

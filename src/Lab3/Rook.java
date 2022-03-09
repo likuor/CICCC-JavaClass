@@ -1,8 +1,9 @@
 package Lab3;
 
-public class Rook extends Piece{
-    public Rook(int value, boolean isWhite){
-        super(value,isWhite);
+public class Rook extends Piece {
+
+    public Rook(boolean isWhite) {
+        super(5, isWhite);
     }
 
     @Override
@@ -11,7 +12,8 @@ public class Rook extends Piece{
     }
 
     @Override
-    public String toString(){
-        return "Rook{value='" + this.getValue() + '\'' + '}';
+    public String toString() {
+        return "Rook{value='" + getValue() + "'}";
     }
+
 }

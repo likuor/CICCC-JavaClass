@@ -1,18 +1,20 @@
 package Lab3;
 
-public class King extends Piece{
-    public King(int value, boolean isWhite){
-        super(value,isWhite);
+public class King extends Piece {
+    private static final int VALUE = 1000;
+
+    public King(boolean isWhite) {
+        super(VALUE, isWhite);
     }
 
     @Override
     public void move() {
-        System.out.println("One Square");
+        System.out.println("One square");
     }
 
     @Override
-    public String toString(){
-        return "King{value='" + this.getValue() + '\'' + '}';
+    public String toString() {
+        return "King{value='" + getValue() + "'}";
     }
 
 }

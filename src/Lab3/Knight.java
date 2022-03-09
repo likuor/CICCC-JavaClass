@@ -1,9 +1,9 @@
 package Lab3;
 
-public class Knight extends Piece{
+public class Knight extends Piece {
 
-    public Knight(int value, boolean isWhite){
-        super(value,isWhite);
+    public Knight(boolean isWhite) {
+        super(2, isWhite);
     }
 
     @Override
@@ -12,7 +12,8 @@ public class Knight extends Piece{
     }
 
     @Override
-    public String toString(){
-        return "Knight{value='" + this.getValue() + '\'' + '}';
+    public String toString() {
+        return "Knight{value='" + getValue() + "'}";
     }
+
 }

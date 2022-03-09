@@ -2,30 +2,30 @@ package Lab3;
 
 public abstract class Piece {
     private int value;
-    private boolean isWhite;
+    protected boolean isWhite;
 
-    public Piece(int value, boolean isWhite){
+    public Piece(int value, boolean isWhite) {
         this.value = value;
         this.isWhite = isWhite;
     }
 
-    public abstract void move();
-
-    public int getValue() {
+    public final int getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public final void setValue(int value) {
         this.value = value;
     }
 
-    public void setWhite(boolean white) {
-        isWhite = false;
-    }
+    public abstract void move();
 
     @Override
-    public String toString(){
-        return "{value='" + value + '\'' + '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Piece piece = (Piece) o;
+        return value == piece.value &&
+                isWhite == piece.isWhite;
     }
 
 }

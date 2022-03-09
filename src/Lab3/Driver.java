@@ -3,28 +3,24 @@ package Lab3;
 import java.util.ArrayList;
 
 public class Driver {
-    public static void main(String[] args) {
-        ArrayList<String> Piece = new ArrayList<String>();
-        Piece king = new King(1000, false);
-        Piece queen = new Queen(9, false);
-        Piece rook = new Rook(5, false);
-        Piece bishop = new Bishop(3, false);
-        Piece knight = new Knight(2, false);
-        Piece pawn = new Pawn(1, false);
+    public static void main(String args[]){
+        Queen queen = new Queen(true);
+        Knight knight = new Knight(true);
 
-        System.out.println(king);
-        System.out.println(queen);
-        System.out.println(rook);
-        System.out.println(bishop);
-        System.out.println(knight);
-        System.out.println(pawn);
+        Pawn p1 = new Pawn(true);
+        p1.promote(queen);
+        Pawn p2 = new Pawn(true);
+        Pawn p3 = new Pawn(false);
+        Pawn p4 = new Pawn(false);
+        p4.promote(queen);
+        Pawn p5 = new Pawn(true);
+        p5.promote(knight);
 
-        king.move();
-        queen.move();
-        rook.move();
-        bishop.move();
-        knight.move();
-        pawn.move();
+        System.out.println(p1.equals(p2));
+        System.out.println(p1.equals(p4));
+        System.out.println(p1.equals(p5));
+        System.out.println(p2.equals(p3));
+        System.out.println(p4.equals(p5));
     }
 
 }

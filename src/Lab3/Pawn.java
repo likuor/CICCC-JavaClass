@@ -1,27 +1,18 @@
 package Lab3;
 
-public class Pawn extends Piece{
-    private boolean promoted;
-    Piece newPiece;
+public class Pawn extends Piece {
+    private boolean promoted;  // false
+    private Piece newPiece;    // null
 
-    public void promote(Piece newPiece){
-
+    public Pawn(boolean isWhite) {
+        super(1, isWhite);
+        promoted = false;
+        newPiece = null;
     }
 
-    public Pawn(int value, boolean isWhite){
-        super(value,isWhite);
-    }
-
-    public Piece getNewPiece() {
-        return newPiece;
-    }
-
-    public void setNewPiece(Piece newPiece) {
+    public void promote(Piece newPiece) {
+        this.promoted = true;
         this.newPiece = newPiece;
-    }
-
-    public void setPromoted(boolean promoted) {
-        this.promoted = promoted;
     }
 
     @Override
@@ -30,8 +21,17 @@ public class Pawn extends Piece{
     }
 
     @Override
-    public String toString(){
-        return "Pawn{value='" + this.getValue() + '\'' + '}';
+    public String toString() {
+        return "Pawn{value='" + getValue() + "'}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pawn pawn = (Pawn) o;
+        return isWhite == pawn.isWhite && promoted == pawn.promoted
+                && (!promoted || newPiece.getValue() == pawn.newPiece.getValue());
     }
 
 }
