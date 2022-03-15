@@ -4,20 +4,28 @@ public class Pawn extends Piece {
     private boolean promoted;  // false
     private Piece newPiece;    // null
 
-    public Pawn(boolean isWhite) {
+    Pawn (int value, boolean isWhite){
         super(1, isWhite);
-        promoted = false;
-        newPiece = null;
     }
 
-    public void promote(Piece newPiece) {
-        this.promoted = true;
+
+    Pawn(int value, boolean isWhite, boolean promoted, Piece newPiece){
+        super(1, isWhite);
+        this.promoted = promoted;
         this.newPiece = newPiece;
     }
 
     @Override
     public void move() {
         System.out.println("Forward 1");
+    }
+
+    public String getIcon(){
+        if(this.isWhite) {
+            return "♟";
+        }else{
+            return "♙";
+        }
     }
 
     @Override

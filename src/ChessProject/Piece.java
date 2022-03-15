@@ -21,6 +21,13 @@ public abstract class Piece {
 
     public abstract void move();
 
+    public abstract String getIcon();
+
+//    public boolean isValidMove(Position newPosition){
+//        return newPosition.getCol() > 0 && newPosition.getCol() < 8 &&
+//                newPosition.getRow() > 0 && newPosition.getRow() < 8;
+//    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
