@@ -1,5 +1,8 @@
 package collections.list;
 
+import com.sun.deploy.perf.DefaultPerfHelper;
+
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class MyArrayList<E> implements List<E> {
@@ -44,16 +47,27 @@ public class MyArrayList<E> implements List<E> {
     }
 
     @Override
+    public String toString() {
+        String res = "[";
+        for (int i = 0; i< size-1 ; i++){
+            res += elementData[i] + ", ";
+        }
+        res += elementData[size - 1] + "]";
+        return res;
+    }
+
+    @Override
     public <T> T[] toArray(T[] a) {
         // TODO: Exercise
-//        for(int i=0 ;i<a.length;i++){
-//            System.out.println(a[i]);
-//        }
-//        for (int i = 0; i < size; i++){
-//            System.out.println(elementData[i]);
-//        }
 
-        return null;
+        if (a.length < size) {
+            return (T[]) Arrays.copyOf(elementData, size);
+        }
+        System.arraycopy(elementData, 0, a, 0, size);
+        if (a.length > size) {
+            a[size] = null;
+        }
+        return a;
     }
 
     @Override
@@ -160,7 +174,16 @@ public class MyArrayList<E> implements List<E> {
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
         // TODO: Exercise
-        return false;
+        Object[] a = c.toArray();
+        int length = a.length;
+
+        if (length > 0){
+            System.arraycopy(elementData, index, elementData, index + length, length);
+        }
+
+        System.arraycopy(a, 0, elementData, index, length);
+        size += length;
+        return length != 0;
     }
 
     @Override
@@ -248,24 +271,31 @@ public class MyArrayList<E> implements List<E> {
     @Override
     public int indexOf(Object o) {
         // TODO: Exercise
+        if (o == null) {
+            for (int i = 0; i < size; i++)
+                if (elementData[i]==null)
+                    return i;
+        } else {
+            for (int i = 0; i < size; i++)
+                if (o.equals(elementData[i]))
+                    return i;
+        }
         return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
         // TODO: Exercise
-        return -1;
-    }
-
-    @Override
-    public String toString() {
-        String res = "[";
-        for (int i = 0; i  < size -1; i++){
-            res += elementData[i]+ ", ";
+        if (o == null) {
+            for (int i = size-1; i >= 0; i--)
+                if (elementData[i]==null)
+                    return i;
+        } else {
+            for (int i = size-1; i >= 0; i--)
+                if (o.equals(elementData[i]))
+                    return i;
         }
-        res += elementData[size -1]+ "]";
-
-        return res;
+        return -1;
     }
 
     @Override
